@@ -2,6 +2,7 @@ import { Shield, Clock, Star, MapPin, Phone, Mail } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import BookingForm from '@/components/BookingForm';
 import ServiceCard from '@/components/ServiceCard';
+import FloatingContacts from '@/components/FloatingContacts';
 import { Button } from '@/components/ui/button';
 import heroCarImage from '@/assets/hero-car.jpg';
 
@@ -27,6 +28,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
+      <FloatingContacts />
       
       {/* Main Content with padding for sidebar */}
       <main className="lg:ml-64 pt-16 lg:pt-0">
@@ -50,8 +52,31 @@ const Index = () => {
                 <span className="block text-gradient">Our Priority</span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
-                Experience premium transportation service in Amman with professional drivers and luxury vehicles.
+                Experience premium transportation service in Madurai with professional drivers and luxury vehicles.
               </p>
+              
+              {/* Stylish Phone Numbers */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a 
+                  href="tel:+916382108701"
+                  className="flex items-center gap-3 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-full px-6 py-3 hover:bg-white/20 transition-all hover:scale-105 group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center group-hover:animate-pulse">
+                    <Phone className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold">6382108701</span>
+                </a>
+                <a 
+                  href="tel:+918778035220"
+                  className="flex items-center gap-3 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-full px-6 py-3 hover:bg-white/20 transition-all hover:scale-105 group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center group-hover:animate-pulse">
+                    <Phone className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold">8778035220</span>
+                </a>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                 <Button 
                   size="lg"
@@ -116,14 +141,66 @@ const Index = () => {
           </div>
         </section>
 
-        {/* About Section */}
+        {/* Location Services Section */}
         <section className="py-20 bg-secondary/30">
+          <div className="container mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">Location Services Available</h2>
+                <p className="text-xl text-muted-foreground">
+                  We serve all major areas across Madurai
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {[
+                  'Periyar Bus Stand, Madurai',
+                  'Kalavasal, Madurai',
+                  'MGR Bus Stand, Madurai',
+                  'Kamarajar Salai, Madurai',
+                  'Sappani Kovil, Madurai',
+                  'Karpaga Nagar, Madurai',
+                  'K.K.Nagar, Madurai',
+                  'BB Kulam, Madurai',
+                  'Villapuram, Madurai',
+                  'Vilangudi, Madurai',
+                  'Azhagaradi, Madurai',
+                  'Therkuvasal, Madurai',
+                  'Anaiyur, Madurai',
+                  'Arappalayam, Madurai',
+                  'Thathaneri, Madurai',
+                  'Goripalayam, Madurai',
+                  'Sellur, Madurai',
+                  'Nilaiyur, Madurai',
+                  'Ponnaharam, Madurai',
+                  'Simmakkal, Madurai',
+                  'Avaniyapuram, Madurai',
+                  'Thiruppaalai, Madurai',
+                  'Othakkadai, Madurai',
+                  'Thiruparankundram, Madurai',
+                ].map((location, index) => (
+                  <div 
+                    key={index}
+                    className="bg-card p-4 rounded-lg border border-border hover:border-accent hover:shadow-md transition-all flex items-center gap-3 animate-fade-in"
+                    style={{ animationDelay: `${index * 0.02}s` }}
+                  >
+                    <MapPin className="w-5 h-5 text-accent flex-shrink-0" />
+                    <span className="text-sm font-medium">Acting Driver in {location}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-8">About Amman Active Drivers</h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 Amman Active Drivers is your trusted ride-hailing service, committed to providing safe, 
-                comfortable, and punctual transportation throughout Amman. With a fleet of well-maintained 
+                comfortable, and punctual transportation throughout Madurai. With a fleet of well-maintained 
                 vehicles and experienced professional drivers, we ensure every journey is smooth and stress-free.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
@@ -149,7 +226,7 @@ const Index = () => {
                     <Phone className="w-7 h-7" />
                   </div>
                   <h3 className="font-semibold text-lg">Call Us</h3>
-                  <p className="text-primary-foreground/80">+962 79 123 4567</p>
+                  <p className="text-primary-foreground/80">+91 6382108701 | +91 8778035220</p>
                 </div>
                 
                 <div className="space-y-3">
@@ -165,7 +242,7 @@ const Index = () => {
                     <MapPin className="w-7 h-7" />
                   </div>
                   <h3 className="font-semibold text-lg">Visit Us</h3>
-                  <p className="text-primary-foreground/80">Amman, Jordan</p>
+                  <p className="text-primary-foreground/80">Madurai, Tamil Nadu</p>
                 </div>
               </div>
 

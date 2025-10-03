@@ -6,10 +6,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { label: 'Home', href: '#home' },
-    { label: 'Services', href: '#services' },
-    { label: 'Book Now', href: '#booking' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '/#home' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Rate Chart', href: '/rates' },
+    { label: 'Book Now', href: '/#booking' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   return (
@@ -83,7 +84,10 @@ const Navbar = () => {
         <div className="p-6 border-t border-primary-foreground/10 space-y-3">
           <div className="flex items-center gap-3 text-sm">
             <Phone className="w-4 h-4 text-accent" />
-            <span>+962 79 123 4567</span>
+            <div className="flex flex-col">
+              <span>+91 6382108701</span>
+              <span>+91 8778035220</span>
+            </div>
           </div>
           <div className="flex items-center gap-3 text-sm">
             <Mail className="w-4 h-4 text-accent" />
@@ -91,7 +95,7 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-3 text-sm">
             <MapPin className="w-4 h-4 text-accent" />
-            <span>Amman, Jordan</span>
+            <span>Madurai, Tamil Nadu</span>
           </div>
         </div>
       </aside>

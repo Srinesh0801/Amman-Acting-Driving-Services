@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Car, MapPin, User, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useToast } from '@/hooks/use-toast';
 
 const BookingForm = () => {
@@ -18,10 +17,28 @@ const BookingForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const message = `
+📌 *New Booking - Amman Acting Driver*
+--------------------------------------
+👤 Name: ${formData.fullName || 'Not provided'}
+📧 Email: ${formData.email || 'Not provided'}
+📞 Phone: ${formData.phone || 'Not provided'}
+🚘 Car Type: ${formData.carType || 'Not specified'}
+📍 Pickup: ${formData.pickup || 'Not specified'}
+🏁 Dropoff: ${formData.dropoff || 'Not specified'}
+    `;
+
+    const whatsappNumber = "916382108701"; // Your WhatsApp number
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
     toast({
       title: "Booking Request Sent!",
-      description: "We'll contact you shortly to confirm your ride.",
+      description: "Redirecting you to WhatsApp to confirm your ride.",
     });
+
+    window.open(url, "_blank");
+
     setFormData({
       fullName: '',
       email: '',
@@ -39,6 +56,7 @@ const BookingForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid md:grid-cols-2 gap-6">
+        {/* Full Name */}
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <User className="w-4 h-4 text-accent" />
@@ -49,11 +67,11 @@ const BookingForm = () => {
             placeholder="John Doe"
             value={formData.fullName}
             onChange={(e) => handleChange('fullName', e.target.value)}
-            required
             className="h-12"
           />
         </div>
 
+        {/* Email */}
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <Mail className="w-4 h-4 text-accent" />
@@ -64,11 +82,11 @@ const BookingForm = () => {
             placeholder="john@example.com"
             value={formData.email}
             onChange={(e) => handleChange('email', e.target.value)}
-            required
             className="h-12"
           />
         </div>
 
+        {/* Phone */}
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <Phone className="w-4 h-4 text-accent" />
@@ -76,32 +94,29 @@ const BookingForm = () => {
           </label>
           <Input
             type="tel"
-            placeholder="+962 79 123 4567"
+            placeholder="+91 63821 08701"
             value={formData.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
-            required
             className="h-12"
           />
         </div>
 
+        {/* Car Type */}
         <div className="space-y-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <Car className="w-4 h-4 text-accent" />
             Car Type
           </label>
-          <Select value={formData.carType} onValueChange={(value) => handleChange('carType', value)} required>
-            <SelectTrigger className="h-12">
-              <SelectValue placeholder="Select car type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="sedan">Sedan - Comfortable & Economic</SelectItem>
-              <SelectItem value="suv">SUV - Spacious & Premium</SelectItem>
-              <SelectItem value="van">Van - Group Travel</SelectItem>
-              <SelectItem value="luxury">Luxury - VIP Experience</SelectItem>
-            </SelectContent>
-          </Select>
+          <input
+            type="text"
+            className="w-full border rounded-lg p-3"
+            placeholder="Enter car type "
+            value={formData.carType}
+            onChange={(e) => handleChange('carType', e.target.value)}
+          />
         </div>
 
+        {/* Pickup */}
         <div className="space-y-2 md:col-span-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <MapPin className="w-4 h-4 text-accent" />
@@ -112,11 +127,11 @@ const BookingForm = () => {
             placeholder="Enter pickup address"
             value={formData.pickup}
             onChange={(e) => handleChange('pickup', e.target.value)}
-            required
             className="h-12"
           />
         </div>
 
+        {/* Dropoff */}
         <div className="space-y-2 md:col-span-2">
           <label className="text-sm font-medium flex items-center gap-2">
             <MapPin className="w-4 h-4 text-accent" />
@@ -127,7 +142,6 @@ const BookingForm = () => {
             placeholder="Enter dropoff address"
             value={formData.dropoff}
             onChange={(e) => handleChange('dropoff', e.target.value)}
-            required
             className="h-12"
           />
         </div>

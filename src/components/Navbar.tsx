@@ -1,104 +1,150 @@
-import { useState } from 'react';
-import { Menu, X, Car, Phone, Mail, MapPin } from 'lucide-react';
-import { Button } from './ui/button';
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import logo from "@/assets/WhatsApp Image 2025-10-20 at 19.03.19_194c2813.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showLogoZoom, setShowLogoZoom] = useState(false);
 
-  const navItems = [
-    { label: 'Home', href: '/#home' },
-    { label: 'Services', href: '/#services' },
-    { label: 'Rate Chart', href: '/rates' },
-    { label: 'Book Now', href: '/#booking' },
-    { label: 'Contact', href: '/#contact' },
+  const navLinks = [
+    { name: "Home", href: "#" },
+    { name: "Book Now", href: "#booking" },
+    { name: "Services", href: "#services" },
+    { name: "Rate Chart", href: "#rate-chart" },
   ];
+
+  // Handle logo click
+  const handleLogoClick = () => {
+    setShowLogoZoom(true);
+  };
+
+  // ✅ Handle back button to close zoomed logo
+  useEffect(() => {
+    if (showLogoZoom) {
+      // Push a new state into history so the back button can close the logo instead of going back a page
+      window.history.pushState({ logoZoom: true }, "");
+    }
+
+    const handlePopState = (event) => {
+      if (showLogoZoom) {
+        // Animate zoom-out
+        const img = document.querySelector(".zoom-animating");
+        if (img) {
+          img.classList.remove("animate-zoomIn");
+          img.classList.add("animate-zoomOut");
+        }
+
+        // Close after animation
+        setTimeout(() => {
+          setShowLogoZoom(false);
+        }, 400);
+
+        // Prevent the browser from actually going back a page
+        window.history.pushState(null, "", window.location.href);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [showLogoZoom]);
 
   return (
     <>
-      {/* Mobile Header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground shadow-md">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-2">
-            <Car className="w-6 h-6" />
-            <span className="font-bold text-lg">Amman Active Drivers</span>
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-primary-foreground hover:bg-primary-foreground/10"
-          >
-            {isOpen ? <X /> : <Menu />}
-          </Button>
+      {/* Zoom Overlay */}
+      {showLogoZoom && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-md transition-opacity duration-500"
+          onClick={(e) => {
+            // Close only if background (not image) is clicked
+            if (e.target === e.currentTarget) {
+              const img = document.querySelector(".zoom-animating");
+              if (img) {
+                img.classList.remove("animate-zoomIn");
+                img.classList.add("animate-zoomOut");
+              }
+              setTimeout(() => setShowLogoZoom(false), 400);
+            }
+          }}
+        >
+          <img
+            src={logo}
+            alt="Amman Acting Driver Logo"
+            className="zoom-animating w-40 h-40 md:w-64 md:h-64 rounded-full border-4 border-accent shadow-glow transform animate-zoomIn cursor-pointer"
+            onClick={(e) => e.stopPropagation()} // prevent accidental close
+          />
         </div>
+      )}
 
-        {/* Mobile Menu */}
-        {isOpen && (
-          <nav className="bg-primary border-t border-primary-foreground/10">
-            <ul className="py-2">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className="block px-4 py-3 hover:bg-primary-foreground/10 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
-      </header>
-
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-64 bg-primary text-primary-foreground flex-col shadow-lg z-50">
-        <div className="p-6 border-b border-primary-foreground/10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-              <Car className="w-6 h-6" />
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-md">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div
+              onClick={handleLogoClick}
+              className="flex items-center gap-3 cursor-pointer select-none"
+            >
+              <img
+                src={logo}
+                alt="Amman Acting Driver"
+                className="w-12 h-12 rounded-full border-2 border-accent transition-transform duration-500 hover:scale-110"
+              />
+              <span className="text-xl font-bold text-primary">
+                Amman Acting Driver
+              </span>
             </div>
-            <div>
-              <h1 className="font-bold text-xl">Amman Active</h1>
-              <p className="text-sm text-primary-foreground/70">Drivers</p>
-            </div>
-          </div>
-        </div>
 
-        <nav className="flex-1 py-6">
-          <ul className="space-y-2 px-3">
-            {navItems.map((item) => (
-              <li key={item.label}>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              {navLinks.map((link) => (
                 <a
-                  href={item.href}
-                  className="block px-4 py-3 rounded-lg hover:bg-primary-foreground/10 transition-all duration-300 hover:translate-x-1"
+                  key={link.name}
+                  href={link.href}
+                  className="text-foreground hover:text-accent transition-colors font-medium"
                 >
-                  {item.label}
+                  {link.name}
                 </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="p-6 border-t border-primary-foreground/10 space-y-3">
-          <div className="flex items-center gap-3 text-sm">
-            <Phone className="w-4 h-4 text-accent" />
-            <div className="flex flex-col">
-              <span>+91 6382108701</span>
-              <span>+91 8778035220</span>
+              ))}
+              <a
+                href="tel:+916382108701"
+                className="gradient-hero text-white px-6 py-2 rounded-full hover:shadow-glow transition-all hover:scale-105 font-semibold"
+              >
+                Call Now
+              </a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-foreground hover:text-accent transition-colors"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
-          <div className="flex items-center gap-3 text-sm">
-            <Mail className="w-4 h-4 text-accent" />
-            <span>info@ammanactive.com</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <MapPin className="w-4 h-4 text-accent" />
-            <span>Madurai, Tamil Nadu</span>
-          </div>
+
+          {/* Mobile Navigation */}
+          {isOpen && (
+            <div className="md:hidden mt-4 pb-4 space-y-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="block text-foreground hover:text-accent transition-colors font-medium py-2"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a
+                href="tel:+916382108701"
+                className="block text-center gradient-hero text-white px-6 py-2 rounded-full hover:shadow-glow transition-all font-semibold"
+              >
+                Call Now
+              </a>
+            </div>
+          )}
         </div>
-      </aside>
+      </nav>
     </>
   );
 };

@@ -542,12 +542,12 @@ const Index = () => {
     </p>
     <p className="flex justify-center items-center gap-2 text-foreground">
       <Mail className="w-5 h-5 text-accent" />
-      <a
+      {/* <a
         href="mailto:info@ammanactive.com"
         className="hover:text-accent transition-colors"
       >
         info@ammanactive.com
-      </a>
+      </a> */}
     </p>
   </div>
 </section>

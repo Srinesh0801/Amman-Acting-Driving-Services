@@ -541,7 +541,11 @@ const Index = () => {
       <span>+91 9080512549 &nbsp;|&nbsp; +91 9940990684</span>
     </p>
     <p className="flex justify-center items-center gap-2 text-foreground">
-      <Mail className="w-5 h-5 text-accent" />
+    git status
+git add .
+git commit -m "Updated UI / fixed bug / new feature"
+git push origin main
+ */}
       {/* <a
         href="mailto:info@ammanactive.com"
         className="hover:text-accent transition-colors"

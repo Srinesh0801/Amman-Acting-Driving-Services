@@ -305,7 +305,7 @@ const HeroSection = () => {
             <span className="text-xl font-bold">9080512549</span>
           </a>
 
-          <a
+          {/* <a
             href="tel:+919940990684"
             className="group flex items-center gap-3 bg-white/10 backdrop-blur-md border-2 border-accent/50 rounded-full px-6 py-4 hover:bg-accent/20 hover:border-accent transition-all hover:scale-105 shadow-elegant"
           >
@@ -313,7 +313,7 @@ const HeroSection = () => {
               <Phone className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl font-bold">9940990684</span>
-          </a>
+          </a> */}
         </div>
 
         {/* CTA Button */}

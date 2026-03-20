@@ -305,15 +305,6 @@ const HeroSection = () => {
             <span className="text-xl font-bold">9080512549</span>
           </a>
 
-          {/* <a
-            href="tel:+919940990684"
-            className="group flex items-center gap-3 bg-white/10 backdrop-blur-md border-2 border-accent/50 rounded-full px-6 py-4 hover:bg-accent/20 hover:border-accent transition-all hover:scale-105 shadow-elegant"
-          >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-primary flex items-center justify-center group-hover:shadow-glow transition-all">
-              <Phone className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold">9940990684</span>
-          </a> */}
         </div>
 
         {/* CTA Button */}
@@ -538,7 +529,7 @@ const Index = () => {
   <div className="space-y-3 text-lg md:text-xl">
     <p className="flex justify-center items-center gap-2 text-foreground">
       <Phone className="w-5 h-5 text-accent" />
-      <span>+91 9080512549 &nbsp;|&nbsp; +91 9940990684</span>
+      <span>+91 9080512549 &nbsp;</span>
     </p>
     <p className="flex justify-center items-center gap-2 text-foreground">
       {/* <Mail className="w-5 h-5 text-accent" /> */}

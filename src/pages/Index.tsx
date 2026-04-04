@@ -330,14 +330,14 @@ const Index = () => {
     {
       title: 'Local Madurai Tariff',
       data: [
-        { hours: '4 Hours', charges: '₹400' },
+        { hours: '4 Hours', charges: '₹500' },
         { hours: 'After 4 Hours', charges: '₹50 / hour' },
       ],
     },
     {
       title: 'Outstation Tariff (Within Tamil Nadu)',
       data: [
-        { hours: '10 Hours', charges: '₹800' },
+        { hours: '10 Hours', charges: '₹1000' },
         { hours: 'After 10 Hours', charges: '₹50 / hour' },
         { hours: 'Extra', charges: 'Food' },
       ],
